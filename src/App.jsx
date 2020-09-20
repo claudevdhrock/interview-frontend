@@ -1,9 +1,24 @@
 import React from 'react';
-import { Router, Link } from '@reach/router';
+import { Router, Link, Match } from '@reach/router';
 
 import Exercise01 from './exercises/Exercise01'
 import Exercise02 from './exercises/Exercise02'
 import Exercise03 from './exercises/Exercise03'
+
+const NavLink = props => (
+  <Link
+    {...props}
+    getProps={({ isCurrent }) => {
+      // the object returned here is passed to the
+      // anchor element's props
+      return {
+        style: {
+          color: isCurrent ? "red" : "blue"
+        }
+      };
+    }}
+  />
+);
 
 const Welcome = () => {
   return <div>
@@ -16,20 +31,20 @@ const Welcome = () => {
 
 const App = () => {
   return <div className="container">
-    <h1 class="py-4">FrontEnd Interview Exercises</h1>
-
+  <ul >
+  <NavLink to="/" className="display-4">FrontEnd Interview Exercises</NavLink>
+  </ul>
     <ul className="nav nav-tabs">
       <li className="nav-item">
-        <Link to="/" className="nav-link active">Homepage</Link>
       </li>
       <li className="nav-item">
-        <Link to="/exercise01" className="nav-link">Exercise 01</Link>
+        <NavLink to="/exercise01" className="nav-link">Exercise 01</NavLink>
       </li>
       <li className="nav-item">
-        <Link to="/exercise02" className="nav-link">Exercise 02</Link>
+        <NavLink to="/exercise02" className="nav-link">Exercise 02</NavLink>
       </li>
       <li className="nav-item">
-        <Link to="/exercise03" className="nav-link">Exercise 03</Link>
+        <NavLink to="/exercise03" className="nav-link">Exercise 03</NavLink>
       </li>
     </ul>
 
